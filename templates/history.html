@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block title %}Analysis History{% endblock %}
+
+{% block content %}
+<style>
+    .history-table .main-row {
+        cursor: pointer;
+        transition: background-color 0.2s ease-in-out;
+    }
+    .history-table .main-row:hover {
+        background-color: rgba(99, 102, 241, 0.05);
+    }
+    .history-table .details-row {
+        display: none; /* Hidden by default */
+    }
+    .history-table .details-row.active {
+        display: table-row; /* Shown when active */
+    }
+    .details-content {
+        padding: 1.5rem;
+        background-color: rgba(0,0,0,0.1);
+        border-left: 4px solid var(--primary);
+    }
+    .details-content h4 {
+        margin-top: 0;
+        color: var(--primary);
+        font-weight: 600;
+    }
+    .details-content p {
+        margin-bottom: 0;
+        line-height: 1.7;
+        color: var(--text-gray);
+    }
+</style>
+
+<div class="page-header">
+    <h1>Analysis History</h1>
+    <p>Track your deepfake detection results and build confidence over time. Click any row to see details.</p>
+</div>
+
+<div class="card">
+    <div class="table-container">
+        {% if history %}
+        <table class="history-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-clock"></i> Timestamp</th>
+                    <th><i class="fas fa-file-image"></i> Filename</th>
+                    <th><i class="fas fa-search"></i> Result</th>
+                    <th><i class="fas fa-percentage"></i> Confidence</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for entry in history %}
+                <tr class="main-row" data-target="#details-{{ loop.index }}">
+                    <td>{{ entry.timestamp }}</td>
+                    <td>{{ entry.filename }}</td>
+                    <td>
+                        <span class="status-{{ entry.result|lower }}">
+                            {% if entry.result|lower == 'real' %}
+                                <i class="fas fa-check-circle"></i>
+                            {% else %}
+                                <i class="fas fa-exclamation-triangle"></i>
+                            {% endif %}
+                            {{ entry.result }}
+                        </span>
+                    </td>
+                    <td><strong>{{ entry.confidence }}</strong></td>
+                </tr>
+                <tr class="details-row" id="details-{{ loop.index }}">
+                    <td colspan="4">
+                        <div class="details-content">
+                            <h4><i class="fas fa-robot"></i> AI-Powered Explanation</h4>
+                            <p>{{ entry.explanation | default('No explanation was saved for this entry.', true) }}</p>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <div style="text-align: center; padding: 4rem; color: var(--text-gray);">
+            <i class="fas fa-history" style="font-size: 4rem; margin-bottom: 1rem; opacity: 0.3;"></i>
+            <h3 style="margin-bottom: 1rem;">No Analysis History Yet</h3>
+            <p style="margin-bottom: 2rem;">Upload your first image to start building your detection history.</p>
+            <a href="{{ url_for('home') }}" class="btn-primary">
+                <i class="fas fa-upload"></i> Start Analyzing
+            </a>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+{% if history %}
+<div class="card" style="margin-top: 2rem;">
+    <div style="text-align: center;">
+        <h3 style="color: var(--primary); margin-bottom: 1rem;">Analysis Summary</h3>
+        <div class="features-grid" style="margin-top: 1.5rem;">
+            <div class="feature-item">
+                <h3><i class="fas fa-chart-bar"></i> Total Scans</h3>
+                <p>{{ history|length }} images analyzed</p>
+            </div>
+            <div class="feature-item">
+                <h3><i class="fas fa-shield-check"></i> Real Images</h3>
+                <p>{{ history|selectattr('result', 'equalto', 'Real')|list|length }} detected as authentic</p>
+            </div>
+            <div class="feature-item">
+                <h3><i class="fas fa-exclamation-circle"></i> Deepfakes</h3>
+                <p>{{ history|selectattr('result', 'equalto', 'Fake')|list|length }} synthetic images detected</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainRows = document.querySelectorAll('.main-row');
+        
+        mainRows.forEach(row => {
+            row.addEventListener('click', () => {
+                const targetId = row.getAttribute('data-target');
+                const detailsRow = document.querySelector(targetId);
+                
+                if (detailsRow) {
+                    detailsRow.classList.toggle('active');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}

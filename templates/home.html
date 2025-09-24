@@ -1,0 +1,113 @@
+{% extends "layout.html" %}
+{% block title %}DeepGuard - AI Deepfake Detector{% endblock %}
+
+{% block content %}
+<div class="hero-section">
+    <div class="hero-content">
+        <h1>Unmasking the Truth in a Digital World</h1>
+        <p>DeepGuard is your first line of defense against digital deception. Use our advanced AI to analyze images and detect sophisticated deepfakes in seconds.</p>
+        <a href="{{ url_for('dashboard') }}" class="btn-primary hero-btn">
+            <i class="fas fa-rocket"></i> Get Started
+        </a>
+    </div>
+</div>
+
+<div class="page-header" style="margin-top: 4rem;">
+    <h2>Stay Informed with the Latest News</h2>
+    <p>The landscape of digital media is always changing. See the latest developments below.</p>
+</div>
+
+<div class="carousel-container">
+    <div class="carousel-track">
+        {% if articles %}
+            {% for article in articles %}
+            <div class="carousel-slide">
+                <div class="news-card">
+                    <img src="{{ article.urlToImage }}" alt="Article Image" class="news-card-img">
+                    <div class="news-card-content">
+                        <span class="news-card-source">{{ article.source.name }}</span>
+                        <h3 class="news-card-title">{{ article.title }}</h3>
+                        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer" class="btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="card" style="text-align: center; width: 100%;">
+                <p>Could not load news articles at this time.</p>
+            </div>
+        {% endif %}
+    </div>
+    {% if articles %}
+    <button class="carousel-btn prev"><i class="fas fa-chevron-left"></i></button>
+    <button class="carousel-btn next"><i class="fas fa-chevron-right"></i></button>
+    {% endif %}
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const carouselContainer = document.querySelector('.carousel-container');
+        const track = document.querySelector('.carousel-track');
+        if (!carouselContainer || !track || track.children.length <= 1) return;
+
+        const slides = Array.from(track.children);
+        const nextButton = document.querySelector('.carousel-btn.next');
+        const prevButton = document.querySelector('.carousel-btn.prev');
+        const slideWidth = slides[0].getBoundingClientRect().width;
+        let currentIndex = 0;
+        let slideInterval;
+
+        // Arrange slides next to one another
+        const setSlidePosition = (slide, index) => {
+            slide.style.left = slideWidth * index + 'px';
+        };
+        slides.forEach(setSlidePosition);
+
+        const moveToSlide = (targetIndex) => {
+            if (track) {
+               track.style.transform = 'translateX(-' + slides[targetIndex].style.left + ')';
+            }
+            currentIndex = targetIndex;
+        }
+
+        const autoSlide = () => {
+            const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+            moveToSlide(nextIndex);
+        }
+
+        // --- Event Listeners ---
+        prevButton.addEventListener('click', () => {
+            const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+            moveToSlide(prevIndex);
+            resetInterval(); // Reset timer on manual click
+        });
+
+        nextButton.addEventListener('click', () => {
+            const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+            moveToSlide(nextIndex);
+            resetInterval(); // Reset timer on manual click
+        });
+
+        carouselContainer.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval); // Pause on hover
+        });
+
+        carouselContainer.addEventListener('mouseleave', () => {
+            startInterval(); // Resume when mouse leaves
+        });
+        
+        // --- Interval Control ---
+        const startInterval = () => {
+            slideInterval = setInterval(autoSlide, 4000); // Move every 4 seconds
+        }
+
+        const resetInterval = () => {
+            clearInterval(slideInterval);
+            startInterval();
+        }
+
+        startInterval(); // Start the auto-slide
+    });
+</script>
+{% endblock %}

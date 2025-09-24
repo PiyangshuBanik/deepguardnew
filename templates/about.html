@@ -1,0 +1,69 @@
+{% extends "layout.html" %}
+{% block title %}About Tech Busters{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Meet the Team: <span style="color: var(--secondary);">Tech Busters</span></h1>
+    <p>Innovators fighting digital deception with cutting-edge AI technology</p>
+</div>
+
+<div class="team-grid">
+    <div class="team-member">
+        <img src="{{ url_for('static', filename='images/piyangshu.jpg') }}" alt="Piyangshu Banik">
+        <h3>Piyangshu Banik</h3>
+        <p class="role">TEAM LEADER</p>
+        <p class="role">AI-ML and Web Development Lead</p>
+        <p>Specializes in Graphics designing and AI and Machine Learning Algorithms. B.E. 3rd Year from Chandigarh University.</p>
+        <p class="linkedin">
+            <a href="https://www.linkedin.com/in/piyangshu-banik-93773828b" target="_blank">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </p>
+    </div>
+    
+    <div class="team-member">
+        <img src="{{ url_for('static', filename='images/gaganpreet.jpg') }}" alt="Gaganpreet Singh">
+        <h3>Gaganpreet Singh</h3>
+        <p class="role">Python and ML Lead</p>
+        <p>Python and Machine Learning Engineer with expertise in handling Python Programms. B.E. 3rd Year from Chandigarh University.</p>
+        <p class="linkedin">
+            <a href="https://www.linkedin.com/in/gaganpreet-singh-80195b28b/" target="_blank">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </p>
+    </div>
+    
+    <div class="team-member">
+        <img src="{{ url_for('static', filename='images/pranshu.jpg') }}" alt="Pranshu Bhutani">
+        <h3>Pranshu Bhutani</h3>
+        <p class="role">Backend & Application Lead</p>
+        <p>Backend technologist focused on interconnecting interfaces and user experience design. B.E. 3rd Year from Chandigarh University.</p>
+        <p class="linkedin">
+            <a href="https://www.linkedin.com/in/pranshu-bhutani-3b750128b/" target="_blank">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </p>
+    </div>
+    
+    <div class="team-member">
+        <img src="{{ url_for('static', filename='images/advitiya.jpg') }}" alt="Advitiya Sharma">
+        <h3>Advitiya Sharma</h3>
+        <p class="role">Front End Developer</p>
+        <p>Specialises in Front-End Development of the Website. B.E. 3rd Year from Chandigarh University.</p>
+        <p class="linkedin">
+            <a href="https://www.linkedin.com/in/advitiyasharma/" target="_blank">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </p>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 3rem;">
+    <div style="text-align: center;">
+        <h2 style="color: var(--primary); margin-bottom: 1.5rem;">Our Mission</h2>
+        <p style="font-size: 1.2rem; line-height: 1.8; color: var(--text-gray); max-width: 800px; margin: 0 auto;">
+            In an era of synthetic media, we build tools to preserve truth. Our platform goes beyond simple detection by providing <strong>clear, AI-powered explanations for every analysis.</strong> We empower users to not only distinguish between real and fake content but to also understand why, fostering a more informed and secure digital age.
+        </p>
+    </div>
+</div>
+{% endblock %}

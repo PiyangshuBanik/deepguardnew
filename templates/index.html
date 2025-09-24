@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard - Deepfake Detector{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>DEEPGUARD: AI Deepfake Detector</h1>
+    <p>Advanced Machine Learning helps in detecting digital deception in Real-Time</p>
+</div>
+
+<div class="card">
+    <form action="{{ url_for('predict') }}" method="post" enctype="multipart/form-data" id="upload-form">
+        <div class="uploader">
+            <label for="file-upload-input">
+                <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i>
+                Drop your image here or click to browse
+            </label>
+            <input id="file-upload-input" type="file" name="file" accept=".png,.jpg,.jpeg" required>
+            <p id="file-name">No file selected</p>
+        </div>
+        <div style="text-align: center;">
+            <button type="submit" class="btn-primary" id="submit-btn" disabled>
+                <i class="fas fa-brain"></i> Analyze Image
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="features-grid">
+    <div class="feature-item">
+        <h3><i class="fas fa-brain"></i> Neural Analysis</h3>
+        <p>State-of-the-art deep learning models trained on millions of authentic and synthetic images.</p>
+    </div>
+    <div class="feature-item">
+        <h3><i class="fas fa-bolt"></i> Lightning Fast</h3>
+        <p>Get accurate results in under 3 seconds with our optimized inference pipeline.</p>
+    </div>
+    <div class="feature-item">
+        <h3><i class="fas fa-shield-alt"></i> Privacy First</h3>
+        <p>Your images are processed securely and deleted immediately after analysis.</p>
+    </div>
+    <div class="feature-item">
+        <h3><i class="fas fa-robot"></i> AI Explanations</h3>
+        <p>Receive detailed, easy-to-understand explanations for every result, powered by Google's AI.</p>
+    </div>
+</div>
+
+<script>
+    const fileInput = document.getElementById('file-upload-input');
+    const fileNameDisplay = document.getElementById('file-name');
+    const submitBtn = document.getElementById('submit-btn');
+    const uploadForm = document.getElementById('upload-form');
+
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            fileNameDisplay.textContent = `Selected: ${fileInput.files[0].name}`;
+            fileNameDisplay.style.color = '#22c55e';
+            submitBtn.disabled = false;
+        } else {
+            fileNameDisplay.textContent = 'No file selected';
+            fileNameDisplay.style.color = '#94a3b8';
+            submitBtn.disabled = true;
+        }
+    });
+
+    // New: Add a loading state on form submission
+    uploadForm.addEventListener('submit', () => {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+    });
+
+    // Drag and drop functionality
+    const uploader = document.querySelector('.uploader');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploader.addEventListener(eventName, preventDefaults, false);
+        document.body.addEventListener(eventName, preventDefaults, false);
+    });
+
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploader.addEventListener(eventName, highlight, false);
+    });
+
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploader.addEventListener(eventName, unhighlight, false);
+    });
+
+    uploader.addEventListener('drop', handleDrop, false);
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function highlight(e) {
+        uploader.style.borderColor = '#6366f1';
+        uploader.style.background = 'rgba(99, 102, 241, 0.1)';
+    }
+
+    function unhighlight(e) {
+        uploader.style.borderColor = 'rgba(99, 102, 241, 0.2)';
+        uploader.style.background = 'transparent';
+    }
+
+    function handleDrop(e) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        if (files.length > 0) {
+            fileInput.files = files;
+            // Trigger the 'change' event manually to update UI
+            fileInput.dispatchEvent(new Event('change'));
+        }
+    }
+</script>
+{% endblock %}

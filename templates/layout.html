@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="An advanced AI-powered tool to detect deepfakes and analyze digital media for authenticity.">
+    <title>{% block title %}Deepfake Detector{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation"></div>
+
+    <aside class="sidebar">
+        <div class="logo">
+            TECH<span>BUSTERS</span>
+        </div>
+        <nav class="nav">
+            <a href="{{ url_for('home') }}" class="nav-link {% if request.endpoint == 'home' %}active{% endif %}">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </a>
+            <a href="{{ url_for('dashboard') }}" class="nav-link {% if request.endpoint == 'dashboard' %}active{% endif %}">
+                <i class="fas fa-th-large"></i>
+                <span>Dashboard</span>
+            </a>
+            <a href="{{ url_for('news') }}" class="nav-link {% if request.endpoint == 'news' %}active{% endif %}">
+                <i class="fas fa-newspaper"></i>
+                <span>News</span>
+            </a>
+            <a href="{{ url_for('forum') }}" class="nav-link {% if request.endpoint == 'forum' %}active{% endif %}">
+                <i class="fas fa-comments"></i>
+                <span>Forum</span>
+            </a>
+            <a href="{{ url_for('history') }}" class="nav-link {% if request.endpoint == 'history' %}active{% endif %}">
+                <i class="fas fa-history"></i>
+                <span>History</span>
+            </a>
+            <a href="{{ url_for('about') }}" class="nav-link {% if request.endpoint == 'about' %}active{% endif %}">
+        <i class="fas fa-users"></i>
+        <span>About Us</span>
+        </a>
+        <a href="{{ url_for('safety') }}" class="nav-link {% if request.endpoint == 'safety' %}active{% endif %}">
+            <i class="fas fa-shield-alt"></i>
+            <span>Safety & Legal</span>
+        </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <button id="menu-toggle"><i class="fas fa-bars"></i></button>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            <ul class="flashes">
+            {% for category, message in messages %}
+              <li class="alert-{{ category }}">{{ message }}</li>
+            {% endfor %}
+            </ul>
+          {% endif %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </main>
+
+        <footer class="site-footer">
+        <div class="footer-content">
+            <div class="footer-column about">
+                <h3>DeepGuard</h3>
+                <p>Your first line of defense against digital deception. We leverage advanced AI to unmask the truth in a digital world.</p>
+            </div>
+            <div class="footer-column links">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url_for('news') }}">News</a></li>
+                    <li><a href="{{ url_for('forum') }}">Forum</a></li>
+                </ul>
+            </div>
+            <div class="footer-column links">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('history') }}">History</a></li>
+                    <li><a href="{{ url_for('about') }}">About Us</a></li>
+                    <li><a href="{{ url_for('safety') }}">Safety & Legal</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tech Busters. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const sidebar = document.querySelector('.sidebar');
+        
+        menuToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            const icon = menuToggle.querySelector('i');
+            if (sidebar.classList.contains('open')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+    </script>
+</body>
+</html>

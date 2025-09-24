@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block title %}Community Forum{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Community Forum</h1>
+    <p>Discuss deepfakes, share findings, and learn from the community. All posts are anonymous.</p>
+</div>
+
+<div class="card post-form-card">
+    <form action="{{ url_for('new_post') }}" method="POST">
+        <h3>Start a New Discussion</h3>
+        <textarea name="content" rows="4" placeholder="Share your thoughts or ask a question..." required></textarea>
+        <button type="submit" class="btn-primary">Post Anonymously</button>
+    </form>
+</div>
+
+<div class="forum-container">
+    {% for post in posts %}
+    <div class="card post-card">
+        <p class="post-meta">Posted on {{ post.timestamp }}</p>
+        <p class="post-content">{{ post.content }}</p>
+
+        <div class="replies-container">
+            {% for reply in post.replies %}
+            <div class="reply-card">
+                <p class="post-meta">Reply from {{ reply.timestamp }}</p>
+                <p class="reply-content">{{ reply.content }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form action="{{ url_for('new_reply', post_id=post.id) }}" method="POST" class="reply-form">
+            <input type="text" name="reply_content" placeholder="Write a reply..." required>
+            <button type="submit">Reply</button>
+        </form>
+    </div>
+    {% else %}
+    <div class="card" style="text-align: center;">
+        <p>No discussions have been started yet. Be the first!</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

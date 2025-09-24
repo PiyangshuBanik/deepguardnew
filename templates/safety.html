@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+{% block title %}Safety & Legal Resources{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Safety & Legal Resources</h1>
+    <p>Information and support channels to help you combat the misuse of synthetic media.</p>
+</div>
+
+<div class="card disclaimer" style="text-align: left; border-color: var(--accent);">
+    <i class="fas fa-gavel" style="margin-right: 0.5rem;"></i>
+    <strong>Disclaimer:</strong> The information provided here is for educational purposes only and does not constitute legal advice. Please consult with a legal professional for advice on your specific situation.
+</div>
+
+<div class="safety-grid">
+    <div class="card safety-card">
+        <h3><i class="fas fa-balance-scale"></i> Legal & Policy Information</h3>
+        <p>Understand the laws and regulations surrounding digital content and harassment in India.</p>
+        <ul class="resource-list">
+            <li><a href="https://www.meity.gov.in/content/information-technology-act-2000" target="_blank">Information Technology Act, 2000</a></li>
+            <li><a href="https://www.indiacode.nic.in/handle/123456789/2191" target="_blank">The Indian Penal Code (IPC)</a></li>
+            <li><a href="https://www.eff.org/issues/deepfakes" target="_blank">Electronic Frontier Foundation (EFF) on Deepfakes</a></li>
+        </ul>
+    </div>
+
+    <div class="card safety-card">
+        <h3><i class="fas fa-flag"></i> Reporting & Support Channels</h3>
+        <p>Report malicious content directly to platforms and authorities. Your action can help protect others.</p>
+        <ul class="resource-list">
+            <li><a href="https://cybercrime.gov.in/" target="_blank">National Cyber Crime Reporting Portal (India)</a></li>
+            <li><a href="https://www.stopncii.org/" target="_blank">StopNCII.org (Stop Non-Consensual Intimate Image Abuse)</a></li>
+            <li><a href="https://www.instagram.com/help/instagram/584260235382352" target="_blank">Report Abuse on Instagram</a></li>
+            <li><a href="https://help.twitter.com/en/rules-and-policies/synthetic-media" target="_blank">Report Synthetic Media on X (Twitter)</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 2rem; border-left: 4px solid var(--danger);">
+    <h2 style="text-align: center; color: var(--danger); margin-bottom: 1.5rem;"><i class="fas fa-exclamation-triangle"></i> Emergency Support</h2>
+    <div class="emergency-contacts">
+        <div>
+            <h4>National Cyber Crime Helpline</h4>
+            <p>For immediate reporting of cyber threats and crimes.</p>
+            <span><i class="fas fa-phone-alt"></i> 1930</span>
+        </div>
+        <div>
+            <h4>National Women Helpline</h4>
+            <p>For women seeking help and support against online harassment.</p>
+            <span><i class="fas fa-phone-alt"></i> 181</span>
+        </div>
+        <div>
+            <h4>Mental Health Support</h4>
+            <p>If you are feeling distressed, please reach out for help.</p>
+            <span><i class="fas fa-globe"></i> <a href="https://www.aasra.info/" target="_blank">AASRA (24x7 Helpline)</a></span>
+        </div>
+    </div>
+</div>
+{% endblock %}
