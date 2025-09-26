@@ -2,11 +2,11 @@
    Variables & General Styles
 ==================================== */
 :root {
-    --primary: #52a6d9;
+    --primary: #6366f1;
     --primary-dark: #4f46e5;
     --primary-light: #818cf8;
-    --secondary: #5f35ea;
-    --accent: #0b13f5;
+    --secondary: #ec4899;
+    --accent: #f59e0b;
     --bg-light: #fafbff;
     --bg-card: rgba(255, 255, 255, 0.9);
     --bg-secondary: #f8fafc;
@@ -18,6 +18,7 @@
     --border: rgba(99, 102, 241, 0.15);
     --shadow: rgba(99, 102, 241, 0.08);
     --hover-bg: rgba(99, 102, 241, 0.05);
+    --new-text-color: #766df7;
 }
 
 * {
@@ -95,7 +96,7 @@ body {
     padding: 0 2rem;
 }
 .logo span {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background: var(--new-text-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -220,7 +221,7 @@ body {
     font-size: 3rem;
     font-weight: 800;
     margin-bottom: 1rem;
-    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+        background: var(--new-text-color);;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -271,7 +272,7 @@ body {
 }
 
 .btn-primary {
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    background: var(--new-text-color);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -386,23 +387,74 @@ body {
     color: var(--text-dark);
 }
 
+/* --- ENHANCED EXPLANATION BOX STYLES --- */
 .explanation-box {
-    margin: 2rem 0;
-    padding: 1.5rem;
-    background-color: var(--bg-secondary);
-    border-left: 4px solid var(--primary);
-    border-radius: 8px;
+    /* Layout & Positioning */
+    margin: 2.5rem 0; /* More vertical space */
+    padding: 2rem; /* Increased padding */
     text-align: left;
+    
+    /* Background & Border */
+    background-color: var(--bg-secondary, #f8f8f8); /* Use a light gray fallback */
+    border-radius: 12px; /* Softer, rounder corners */
+    border: 1px solid var(--border-color, #e0e0e0); /* Subtle full border */
+    
+    /* Depth Effect (Optional: add a subtle shadow for elevation) */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); 
+    
+    /* Emphasizing the Left Accent */
+    border-left: 6px solid var(--primary, #007bff); /* Thicker accent line */
+    transition: all 0.3s ease; /* Smooth transition on hover/focus */
 }
+
+/* Optional: Subtle Hover effect to highlight the element */
+.explanation-box:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+/* --- HEADING STYLES (Focus on Clarity and Contrast) --- */
 .explanation-box h4 {
+    color: var(--primary, #007bff); 
+    font-weight: 700; /* Bolder heading */
+    font-size: 1.4rem; /* Slightly larger heading */
     margin-top: 0;
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem; /* More space below the heading */
+    border-bottom: 1px solid var(--border-light, #eee); /* Separator line */
+    padding-bottom: 0.5rem;
 }
+
+/* --- PARAGRAPH/LIST STYLES (Focus on Readability) --- */
 .explanation-box p {
-    line-height: 1.7;
-    color: var(--text-gray);
+    line-height: 1.8; /* Increased line spacing for better scanning */
+    color: var(--text-color, #333333); /* Use a deeper color for main text */
+    margin-bottom: 1.5rem; /* Better spacing between paragraphs */
+}
+
+/* --- STYLES FOR LISTS (If the content is returned as an unordered list <ul>) --- */
+/* The Gemini model usually returns bullet points as actual markdown, 
+   but if it's rendered as an <ul>, these styles make it look better: */
+.explanation-box ul {
+    list-style: none; /* Remove default bullets */
+    padding-left: 0;
+}
+
+.explanation-box li {
+    position: relative;
+    padding-left: 1.5rem; /* Space for custom bullet */
+    margin-bottom: 1rem; /* Spacing between points */
+    line-height: 1.6;
+    color: var(--text-color, #333333);
+}
+
+.explanation-box li::before {
+    content: "•"; /* Custom bullet point (you can use a checkmark or icon) */
+    color: var(--primary, #007bff); /* Color the bullet point */
+    font-weight: 800;
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 1.2rem;
 }
 
 .disclaimer {
@@ -432,7 +484,7 @@ body {
     border-bottom: 1px solid var(--border);
 }
 .history-table th {
-    background: linear-gradient(45deg, var(--primary), var(--primary-light));
+    background: var(--new-text-color);
     color: white;
 }
 .history-table .main-row {
@@ -621,7 +673,7 @@ body {
     font-size: 3.5rem;
     font-weight: 800;
     margin-bottom: 1.5rem;
-    background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+    background: var(--new-text-color);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -645,7 +697,7 @@ body {
     position: relative;
     width: 100%;
     max-width: 1200px;
-    margin: 3rem;
+    margin: 2rem auto;
     overflow: hidden;
     border-radius: 20px;
     box-shadow: 0 8px 25px var(--shadow);
@@ -663,12 +715,11 @@ body {
     top: 0;
     bottom: 0;
     width: 31%;
-    margin: 0 1.16%;
+    margin: 1rem auto;
 }
 
 .carousel-slide .news-card {
     height: 100%;
-    gap: 2rem;
 }
 
 .carousel-btn {

@@ -80,8 +80,7 @@ def save_forum_posts(posts):
 
 def load_keras_model():
     try:
-        # NOTE: The critical DepthwiseConv2D error is likely a version mismatch.
-        # You may need to run: pip install tensorflow==[version used to save model]
+        # NOTE: This loads the deepfake_model.h5 provided in your path.
         model = load_model(MODEL_PATH)
         print("✅ AI Model loaded successfully.")
         return model
@@ -97,7 +96,7 @@ def get_gemini_explanation(result, confidence, image_path):
     try:
         img = Image.open(image_path)
         
-        # --- MODIFIED PROMPT: Requesting bulleted format with spacing ---
+        # --- PROMPT for Gemini Multimodal Analysis ---
         if result == 'Real':
             prompt = (
                 f"My deepfake detection model determined this image is 'Real' with {confidence:.2f}% confidence. "
@@ -110,15 +109,13 @@ def get_gemini_explanation(result, confidence, image_path):
                 f"Provide a detailed explanation in a **bulleted list format** with clear line breaks/spacing between points. "
                 f"Point out specific signs of being AI-generated or manipulated, such as inconsistencies, or unnatural features."
             )
-        # --- END OF MODIFIED PROMPT ---
+        # --- END OF PROMPT ---
         
-        # --- Add this line to see the full exception details ---
         print(f"Attempting Gemini call for image: {image_path}")
         
         response = gemini_model.generate_content([prompt, img])
         return response.text
     except Exception as e:
-        # --- Crucial change: Print the actual error `e` to your console ---
         print(f"❌ Error calling Gemini API: {e}") 
         return "An error occurred while generating the detailed explanation."
 
@@ -127,15 +124,11 @@ def allowed_file(filename):
 
 def preprocess_image(img_path):
     """
-    Loads an image, resizes it, and converts it to a normalized numpy array.
-    Ensures 3 channels (RGB) to prevent input shape errors.
+    Loads an image, resizes it to 128x128, and normalizes it for model input.
     """
     try:
         img = image.load_img(img_path, target_size=(IMG_WIDTH, IMG_HEIGHT))
-        
-        # --- FIX for potential 1-channel image errors (from previous issues) ---
         img = img.convert('RGB')
-        
         img_array = image.img_to_array(img)
         img_array = np.expand_dims(img_array, axis=0)
         img_array /= 255.0
@@ -239,16 +232,18 @@ def predict():
         prediction = model.predict(img_array)
         confidence = float(prediction[0][0])
         
-        # New classification threshold used in your original code
+        # Classification logic
         NEW_THRESHOLD = 0.50 
         is_fake = confidence > NEW_THRESHOLD
         
         result = "Fake" if is_fake else "Real"
+        # Display confidence is always the confidence in the predicted class
         display_confidence = (confidence if is_fake else 1 - confidence) * 100
         
-        # Explanation with Gemini (now requesting bullet points and spacing)
+        # Get detailed explanation
         gemini_explanation = get_gemini_explanation(result, display_confidence, file_path)
         
+        # Save to history
         history_entry = {
             'filename': filename,
             'result': result,
@@ -258,6 +253,7 @@ def predict():
         }
         save_history(history_entry)
         
+        # Render result page
         return render_template(
             'result.html',
             result=result,
