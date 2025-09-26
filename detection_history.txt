@@ -1,0 +1,13 @@
+2025-09-26 10:11:58 | File: 605b9b86a82dd0147ed8aa612381326f.jpg | RESULT: FAKE | Confidence: 99.86% | Time: 0.429s
+2025-09-26 10:12:16 | File: WhatsApp Image 2025-02-25 at 10.10.24_034e955b.jpg | RESULT: REAL | Confidence: 70.52% | Time: 0.141s
+2025-09-26 10:12:27 | File: aapnvogymq-001-00.png | RESULT: REAL | Confidence: 80.83% | Time: 0.15s
+2025-09-26 10:12:38 | File: WhatsApp Image 2025-03-11 at 12.16.06_58fffd7a.jpg | RESULT: FAKE | Confidence: 86.47% | Time: 0.269s
+2025-09-26 10:12:46 | File: WhatsApp Image 2025-03-01 at 21.32.30_05b5f4ad.jpg | RESULT: FAKE | Confidence: 88.07% | Time: 0.124s
+2025-09-26 10:34:12 | File: 605b9b86a82dd0147ed8aa612381326f.jpg | RESULT: FAKE | Confidence: 99.86% | Time: 0.235s
+2025-09-26 12:00:50 | File: 605b9b86a82dd0147ed8aa612381326f.jpg | RESULT: FAKE | Confidence: 99.86% | Time: 0.21s
+2025-09-26 12:32:17 | File: WhatsApp Image 2025-09-26 at 12.31.40_904c2baa.jpg | RESULT: FAKE | Confidence: 96.86% | Time: 0.239s
+2025-09-26 12:32:51 | File: WhatsApp Image 2025-09-26 at 12.31.40_66ae2bcc.jpg | RESULT: FAKE | Confidence: 92.66% | Time: 0.104s
+2025-09-26 12:34:38 | File: WhatsApp Image 2025-09-25 at 00.37.13_624a6b8d.jpg | RESULT: REAL | Confidence: 61.42% | Time: 0.127s
+2025-09-26 12:35:11 | File: WhatsApp Image 2025-09-26 at 12.34.25_dd8b68bf.jpg | RESULT: REAL | Confidence: 67.75% | Time: 0.102s
+2025-09-26 12:36:06 | File: WhatsApp Image 2025-09-26 at 12.34.25_dd8b68bf.jpg | RESULT: REAL | Confidence: 67.75% | Time: 0.103s
+2025-09-26 14:23:46 | File: 605b9b86a82dd0147ed8aa612381326f.jpg | RESULT: FAKE | Confidence: 99.86% | Time: 0.22s

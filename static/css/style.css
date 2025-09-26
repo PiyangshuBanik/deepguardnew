@@ -2,17 +2,22 @@
    Variables & General Styles
 ==================================== */
 :root {
-    --primary: #6366f1;
+    --primary: #52a6d9;
     --primary-dark: #4f46e5;
-    --secondary: #ec4899;
-    --accent: #f59e0b;
-    --bg-dark: #0f0f23;
-    --bg-card: rgba(15, 15, 35, 0.8);
-    --text-light: #f8fafc;
-    --text-gray: #94a3b8;
+    --primary-light: #818cf8;
+    --secondary: #5f35ea;
+    --accent: #0b13f5;
+    --bg-light: #fafbff;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-secondary: #f8fafc;
+    --text-dark: #1e293b;
+    --text-gray: #64748b;
+    --text-muted: #94a3b8;
     --success: #22c55e;
     --danger: #ef4444;
-    --border: rgba(99, 102, 241, 0.2);
+    --border: rgba(99, 102, 241, 0.15);
+    --shadow: rgba(99, 102, 241, 0.08);
+    --hover-bg: rgba(99, 102, 241, 0.05);
 }
 
 * {
@@ -23,8 +28,8 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background: var(--bg-light);
+    color: var(--text-dark);
     overflow-x: hidden;
     min-height: 100vh;
 }
@@ -34,7 +39,7 @@ body {
     width: 8px;
 }
 ::-webkit-scrollbar-track {
-    background: var(--bg-dark);
+    background: var(--bg-light);
 }
 ::-webkit-scrollbar-thumb {
     background: var(--primary);
@@ -54,7 +59,7 @@ body {
     width: 100vw;
     height: 100vh;
     z-index: -1;
-    background: linear-gradient(-45deg, #0f0f23, #1e1e3f, #2d1b69, #1a0f2e);
+    background: linear-gradient(-45deg, #fafbff, #f1f5ff, #e8edff, #f8fafc);
     background-size: 400% 400%;
     animation: gradientShift 15s ease infinite;
 }
@@ -72,12 +77,13 @@ body {
     top: 0;
     width: 280px;
     height: 100vh;
-    background: rgba(15, 15, 35, 0.9);
+    background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(20px);
     border-right: 1px solid var(--border);
     padding: 2rem 0;
     z-index: 1000;
     transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 20px var(--shadow);
 }
 
 .logo {
@@ -85,7 +91,7 @@ body {
     margin-bottom: 3rem;
     font-size: 1.8rem;
     font-weight: 800;
-    color: var(--text-light);
+    color: var(--text-dark);
     padding: 0 2rem;
 }
 .logo span {
@@ -109,9 +115,10 @@ body {
     transition: all 0.3s ease;
 }
 .nav-link:hover, .nav-link.active {
-    color: var(--text-light);
-    background: var(--primary);
+    color: var(--text-dark);
+    background: var(--hover-bg);
     transform: translateX(5px);
+    box-shadow: 0 4px 12px var(--shadow);
 }
 .nav-link i {
     margin-right: 1rem;
@@ -131,8 +138,8 @@ body {
    Site Footer Styles
 ==================================== */
 .site-footer {
-    margin-left: 280px; /* Match main-content margin */
-    background: var(--bg-dark);
+    margin-left: 280px;
+    background: var(--bg-secondary);
     padding: 3rem 2rem 1.5rem 2rem;
     border-top: 1px solid var(--border);
     transition: margin-left 0.3s ease-in-out;
@@ -232,7 +239,7 @@ body {
     border-radius: 20px;
     padding: 2.5rem;
     margin-bottom: 2rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px var(--shadow);
 }
 
 .uploader {
@@ -243,10 +250,11 @@ body {
     margin-bottom: 2rem;
     transition: all 0.3s ease;
     cursor: pointer;
+    background: var(--bg-secondary);
 }
 .uploader:hover, .uploader.dragover {
     border-color: var(--primary);
-    background: rgba(99, 102, 241, 0.05);
+    background: var(--hover-bg);
 }
 .uploader label {
     color: var(--text-gray);
@@ -258,13 +266,13 @@ body {
 }
 #file-name {
     margin-top: 1rem;
-    color: var(--text-light);
+    color: var(--text-dark);
     font-weight: 600;
 }
 
 .btn-primary {
     background: linear-gradient(45deg, var(--primary), var(--secondary));
-    color: var(--text-light);
+    color: white;
     border: none;
     padding: 1rem 2rem;
     border-radius: 12px;
@@ -277,7 +285,7 @@ body {
 }
 .btn-primary:hover:not(:disabled) {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
 }
 .btn-primary:disabled {
     opacity: 0.5;
@@ -298,10 +306,15 @@ body {
 .feature-item {
     text-align: center;
     padding: 2rem;
-    background: rgba(15, 15, 35, 0.6);
+    background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+.feature-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.15);
 }
 .feature-item h3 {
     color: var(--primary);
@@ -329,10 +342,11 @@ body {
     border-radius: 20px;
     padding: 2rem;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--shadow);
 }
 .team-member:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.2);
 }
 .team-member img {
     width: 120px;
@@ -354,12 +368,12 @@ body {
     margin-bottom: 2rem;
 }
 .result-display.real {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.2), rgba(34, 197, 94, 0.1));
-    border: 1px solid var(--success);
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
+    border: 2px solid var(--success);
 }
 .result-display.fake {
-    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(239, 68, 68, 0.1));
-    border: 1px solid var(--danger);
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.1), rgba(239, 68, 68, 0.05));
+    border: 2px solid var(--danger);
 }
 .result-text {
     font-size: 3rem;
@@ -369,13 +383,13 @@ body {
 .result-text.fake { color: var(--danger); }
 .confidence-text {
     font-size: 1.5rem;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .explanation-box {
     margin: 2rem 0;
     padding: 1.5rem;
-    background-color: rgba(0,0,0,0.2);
+    background-color: var(--bg-secondary);
     border-left: 4px solid var(--primary);
     border-radius: 8px;
     text-align: left;
@@ -404,6 +418,9 @@ body {
 /* History Page - Accordion Table */
 .table-container {
     overflow-x: auto;
+    background: var(--bg-card);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px var(--shadow);
 }
 .history-table {
     width: 100%;
@@ -415,14 +432,16 @@ body {
     border-bottom: 1px solid var(--border);
 }
 .history-table th {
-    background-color: var(--primary-dark);
+    background: linear-gradient(45deg, var(--primary), var(--primary-light));
+    color: white;
 }
 .history-table .main-row {
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    background: white;
 }
 .history-table .main-row:hover {
-    background-color: rgba(99, 102, 241, 0.1);
+    background-color: var(--hover-bg);
 }
 .history-table .details-row {
     display: none;
@@ -432,7 +451,7 @@ body {
 }
 .details-content {
     padding: 1.5rem;
-    background-color: rgba(0,0,0,0.2);
+    background-color: var(--bg-secondary);
 }
 .status-real, .status-fake {
     color: white;
@@ -455,7 +474,7 @@ body {
     margin-bottom: 0.5rem;
 }
 .alert-error {
-    background: rgba(239, 68, 68, 0.2);
+    background: rgba(239, 68, 68, 0.1);
     color: var(--danger);
     border: 1px solid var(--danger);
 }
@@ -464,7 +483,7 @@ body {
    Responsive Design (Mobile First)
 ==================================== */
 #menu-toggle {
-    display: none; /* Hidden on desktop */
+    display: none;
     position: fixed;
     top: 1rem;
     right: 1rem;
@@ -477,12 +496,13 @@ body {
     border-radius: 50%;
     font-size: 1.5rem;
     cursor: pointer;
+    box-shadow: 0 4px 12px var(--shadow);
 }
 
 @media (max-width: 992px) {
     .sidebar {
         transform: translateX(-100%);
-        box-shadow: 10px 0 30px rgba(0,0,0,0.3);
+        box-shadow: 10px 0 30px rgba(99, 102, 241, 0.1);
     }
     .sidebar.open {
         transform: translateX(0);
@@ -523,13 +543,13 @@ body {
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
 }
 
 .news-card-img {
@@ -543,11 +563,12 @@ body {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    background: white;
 }
 
 .news-card-source {
     background: var(--primary);
-    color: var(--text-light);
+    color: white;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -559,7 +580,7 @@ body {
 .news-card-title {
     font-size: 1.25rem;
     margin-bottom: 0.75rem;
-    color: var(--text-light);
+    color: var(--text-dark);
 }
 
 .news-card-desc {
@@ -581,7 +602,6 @@ body {
     }
 }
 
-
 /* =================================
    New Home Page Styles
 ==================================== */
@@ -592,8 +612,9 @@ body {
     text-align: center;
     padding: 6rem 2rem;
     border-radius: 20px;
-    background: rgba(15, 15, 35, 0.7);
+    background: var(--bg-card);
     border: 1px solid var(--border);
+    box-shadow: 0 10px 30px var(--shadow);
 }
 
 .hero-content h1 {
@@ -623,43 +644,51 @@ body {
 .carousel-container {
     position: relative;
     width: 100%;
-    max-width: 1200px; /* Adjust as needed */
-    margin: 2rem auto;
+    max-width: 1200px;
+    margin: 3rem;
     overflow: hidden;
     border-radius: 20px;
+    box-shadow: 0 8px 25px var(--shadow);
 }
 
 .carousel-track {
     position: relative;
-    height: 520px; /* Adjust based on card height */
+    height: 520px;
     transition: transform 0.5s ease-in-out;
+    background: var(--bg-secondary);
 }
 
 .carousel-slide {
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 31%; /* Show roughly 3 slides */
+    width: 31%;
     margin: 0 1.16%;
 }
 
 .carousel-slide .news-card {
     height: 100%;
+    gap: 2rem;
 }
 
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(15, 15, 35, 0.8);
+    background: var(--bg-card);
     border: 1px solid var(--border);
-    color: var(--text-light);
+    color: var(--text-dark);
     width: 50px;
     height: 50px;
     border-radius: 50%;
     cursor: pointer;
     font-size: 1.5rem;
     z-index: 10;
+    box-shadow: 0 4px 12px var(--shadow);
+}
+
+.carousel-btn:hover {
+    background: var(--hover-bg);
 }
 
 .carousel-btn.prev {
@@ -673,7 +702,7 @@ body {
 /* Responsive adjustments for carousel */
 @media (max-width: 992px) {
     .carousel-slide {
-        width: 48%; /* Show 2 slides */
+        width: 48%;
         margin: 0 1%;
     }
 }
@@ -682,11 +711,10 @@ body {
         font-size: 2.5rem;
     }
     .carousel-slide {
-        width: 96%; /* Show 1 slide */
+        width: 96%;
         margin: 0 2%;
     }
 }
-
 
 /* =================================
    Forum Page Styles
@@ -700,8 +728,8 @@ body {
     padding: 1rem;
     border-radius: 12px;
     border: 1px solid var(--border);
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background: white;
+    color: var(--text-dark);
     font-size: 1rem;
     font-family: inherit;
     margin-bottom: 1rem;
@@ -713,13 +741,14 @@ body {
 }
 .post-meta {
     font-size: 0.8rem;
-    color: var(--text-gray);
+    color: var(--text-muted);
     margin-bottom: 1rem;
 }
 .post-content {
     font-size: 1.1rem;
     line-height: 1.7;
     margin-bottom: 1.5rem;
+    color: var(--text-dark);
 }
 
 .replies-container {
@@ -729,10 +758,11 @@ body {
     margin-bottom: 1.5rem;
 }
 .reply-card {
-    background: rgba(0,0,0,0.2);
+    background: var(--bg-secondary);
     padding: 1rem;
     border-radius: 12px;
     margin-bottom: 1rem;
+    border: 1px solid var(--border);
 }
 
 .reply-form {
@@ -742,15 +772,15 @@ body {
 .reply-form input {
     flex-grow: 1;
     border: 1px solid var(--border);
-    background: var(--bg-dark);
-    color: var(--text-light);
+    background: white;
+    color: var(--text-dark);
     border-radius: 20px;
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
 }
 .reply-form button {
     background: var(--primary);
-    color: var(--text-light);
+    color: white;
     border: none;
     border-radius: 20px;
     padding: 0.5rem 1rem;
@@ -813,7 +843,7 @@ body {
 
 .emergency-contacts h4 {
     font-size: 1.2rem;
-    color: var(--text-light);
+    color: var(--text-dark);
     margin-bottom: 0.5rem;
 }
 
@@ -833,4 +863,3 @@ body {
     color: var(--danger);
     text-decoration: none;
 }
-
